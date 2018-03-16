@@ -129,6 +129,10 @@ void Engine::ChangeScene(Scene* s) {
     old->UnLoad(); // todo: Unload Async
   }
 
+  // Notes:
+  // * There is a `thread::sleep_for(3)` insode `Scene1.load().
+  // * If the game crashes change `_activeScene->LoadAsync()` to `_activeScene->Load()`.
+
   if (!s->isLoaded()) {
     cout << "Eng: Entering Loading Screen\n";
     loadingTime =0;
