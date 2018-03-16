@@ -5,7 +5,7 @@
 using namespace std;
 
 MenuScene menu;
-//SteeringScene steeringScene;
+SteeringScene steeringScene;
 //PathfindingScene pathfindingScene;
 
 int main() {

@@ -17,7 +17,7 @@ void MenuScene::Load() {
 
 void MenuScene::Update(const double& dt) {
   if (sf::Keyboard::isKeyPressed(Keyboard::Num1)) {
-    //Engine::ChangeScene(&steeringScene);
+    Engine::ChangeScene(&steeringScene);
   }
   else if (sf::Keyboard::isKeyPressed(Keyboard::Num2)) {
 	  //Engine::ChangeScene(&pathfindingScene);
