@@ -6,7 +6,7 @@ using namespace std;
 
 MenuScene menu;
 SteeringScene steeringScene;
-//PathfindingScene pathfindingScene;
+PathfindingScene pathfindingScene;
 
 int main() {
 	Engine::Start(1280, 720, "Steering", &menu);
