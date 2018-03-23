@@ -121,7 +121,7 @@ vector<Vector2i> pathFind(Vector2i start, Vector2i finish)
 			auto next = pos + dir;
 
 			// Check if nect is valid
-			if (!(next.x < 0 || next.x > ls::getWidth() || next.y < 0 || next > ls::getHeight() ||
+			if (!(next.x < 0 || next.x > ls::getWidth() || next.y < 0 || next.y > ls::getHeight() ||
 				ls::getTile(Vector2ul(next.x, next.y)) == LevelSystem::WALL ||
 				closed_nodes_map[next.x][next.y]))
 			{
