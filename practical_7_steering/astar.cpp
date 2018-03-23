@@ -86,4 +86,86 @@ vector<Vector2i> pathFind(Vector2i start, Vector2i finish)
 	open_nodes_map[start.x][start.y] = n0.getPriority();
 
 	// Loop until queue is empty
+	while (!queue[queue_index].empty())
+	{
+		auto tmp = queue[queue_index].top();
+		n0 = Node(tmp.getPos(), tmp.getLevel(), tmp.getPriority());
+		auto pos = n0.getPos();
+
+		// Remove node from open list
+		queue[queue_index].pop();
+		open_nodes_map[pos.x][pos.y] = 0;
+		// Mark on closed node list
+		closed_nodes_map[pos.x][pos.y] = true;
+
+		// Check if reached goal
+		if (pos == finish)
+		{
+			vector<Vector2i> path;
+			while (!(pos == start))
+			{
+				// Get the direction
+				auto dir = direction_map[pos.x][pos.y];
+				// Add the current position to the path
+				path.push_back(pos);
+				pos += dir;
+			}
+			// Path is inverted
+			reverse(begin(path), end(path));
+			// Return path
+			return path;
+		}
+		// Not reached goal. Check for directions
+		for (auto& dir : directions)
+		{
+			auto next = pos + dir;
+
+			// Check if nect is valid
+			if (!(next.x < 0 || next.x > ls::getWidth() || next.y < 0 || next > ls::getHeight() ||
+				ls::getTile(Vector2ul(next.x, next.y)) == LevelSystem::WALL ||
+				closed_nodes_map[next.x][next.y]))
+			{
+				// Generate new node
+				Node m0(next, n0.getLevel(), n0.getPriority());
+				m0.nextLevel();
+				m0.updatePriority(finish);
+
+				// Check if new node has no priority
+				if (open_nodes_map[next.x][next.y] == 0)
+				{
+					// Update epriority and add to the queue
+					open_nodes_map[next.x][next.y] = m0.getPriority();
+					queue[queue_index].push(m0);
+					// Put the opposite direction into the direction map.
+					// We work backwards
+					direction_map[next.x][next.y] = dir * -1;
+				}
+				// If it has a priority, check if the priority is better on the new route
+				else if (open_nodes_map[next.x][next.y] > m0.getPriority())
+				{
+					// Update priority informations
+					open_nodes_map[next.x][next.y] = m0.getPriority();
+					// Update the direction map with the inverse direction
+					direction_map[next.x][next.y] = dir * -1;
+					// Now replace the node via swapping across the lists and ignoring the old one
+					while (queue[queue_index].top().getPos() != next)
+					{
+						queue[1 - queue_index].push(queue[queue_index].top());
+						queue[queue_index].pop();
+					}
+					queue[queue_index].pop();
+					if (queue[queue_index].size() > queue[1 - queue_index].size())
+						queue_index = 1 - queue_index;
+					while (!queue[queue_index].empty())
+					{
+						queue[1 - queue_index].push(queue[queue_index].top());
+						queue[queue_index].pop();
+					}
+					queue_index = 1 - queue_index;
+					queue[queue_index].push(m0);
+				}
+			}
+		}
+	}
+	return vector<Vector2i>();
 }
