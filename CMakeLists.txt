@@ -122,12 +122,12 @@ set(EXECUTABLES ${EXECUTABLES} PRACTICAL_7_STEERING)
 
 
 ## 8 - Decisions
-
-
-
-
-
-
+file(GLOB_RECURSE SOURCES practical_8_decisions/*.cpp practical_8_decisions/*.h)
+file(GLOB_RECURSE CMPNTS practical_8_decisions/components/*.cpp practical_8_decisions/components/*.h)
+file(GLOB_RECURSE SCENES practical_8_decisions/scenes/*.cpp practical_8_decisions/scenes/*.h)
+add_executable(PRACTICAL_8_DECISIONS ${SOURCES} ${CMPNTS} ${SCENES} ${RESOURCE_FILES})
+target_link_libraries(PRACTICAL_8_DECISIONS lib_engine)
+set(EXECUTABLES ${EXECUTABLES} PRACTICAL_8_DECISIONS)
 
 
 ## 9 - Deployment
