@@ -1,4 +1,10 @@
 #include "scene_state.h"
+#include "../components/cmp_sprite.h"
+#include "../components/cmp_basic_movement.h"
+#include <LevelSystem.h>
+
+using namespace std;
+using namespace sf;
 
 void StateScene::Load()
 {

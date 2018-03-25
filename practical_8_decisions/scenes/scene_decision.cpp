@@ -1,4 +1,13 @@
 #include "scene_decision.h"
+#include "../components/cmp_sprite.h"
+#include "../components/cmp_basic_movement.h"
+#include <LevelSystem.h>
+#include <random>
+#include <chrono>
+
+using namespace std;
+using namespace std::chrono;
+using namespace sf;
 
 void DecisionScene::Load()
 {
