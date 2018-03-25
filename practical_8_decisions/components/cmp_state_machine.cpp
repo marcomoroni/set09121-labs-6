@@ -3,7 +3,7 @@
 using namespace std;
 
 StateMachineComponent::StateMachineComponent(Entity* p)
-	: _current_state_name(nullptr), Component(p)
+	: _current_state(nullptr), Component(p)
 {
 }
 
