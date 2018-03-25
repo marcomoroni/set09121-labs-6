@@ -16,7 +16,7 @@ class Decision : public DecisionTreeNode
 protected:
 	std::shared_ptr<DecisionTreeNode> _trueNode;
 	std::shared_ptr<DecisionTreeNode> _falseNode;
-	virtual std::shared_ptr<DecisionTreeNode> getBranch(Entity* owner);
+	virtual std::shared_ptr<DecisionTreeNode> getBranch(Entity* owner) = 0;
 
 public:
 	Decision(std::shared_ptr<DecisionTreeNode> trueNode, std::shared_ptr<DecisionTreeNode> falseNode)
